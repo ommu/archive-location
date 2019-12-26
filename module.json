@@ -1,0 +1,9 @@
+{
+	"id": "archive-location",
+	"name": "Archive-location",
+	"description": "Archive location for OMMU archive module",
+	"keywords": [
+		"archive, location, archive-location, siks, mediaakses, media-akses"
+	],
+	"version": "1.0"
+}
