@@ -10,7 +10,17 @@
  *
  */
 
+use ommu\archiveLocation\Events;
+use ommu\archiveLocation\models\ArchiveLocationBuilding;
+
 return [
 	'id' => 'archive-location',
 	'class' => ommu\archiveLocation\Module::className(),
+	'events' => [
+		[
+			'class'    => ArchiveLocationBuilding::className(),
+			'event'    => ArchiveLocationBuilding::EVENT_BEFORE_SAVE_ARCHIVE_LOCATION,
+			'callback' => [Events::className(), 'onBeforeSaveArchiveLocation']
+		],
+	],
 ];

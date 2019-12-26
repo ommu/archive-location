@@ -1,0 +1,21 @@
+location_submenu:
+  build:
+    label: Building
+    url: ['admin/index']
+    select: controller
+  depo:
+    label: Depo(s)
+    url: ['depo/index']
+    select: controller
+  room:
+    label: Room(s)
+    url: ['room/index']
+    select: controller
+  rack:
+    label: Rack(s)
+    url: ['rack/index']
+    select: controller
+  storage:
+    label: Storages
+    url: ['storage/index']
+    select: controller
