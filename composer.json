@@ -1,0 +1,48 @@
+{
+	"name": "ommu/archiveLocation",
+	"description": "Archive location module for OMMU",
+	"type": "ommu-module",
+	"keywords": [
+		"module",
+		"archive",
+		"location",
+		"archive-location",
+		"siks",
+		"media-akses",
+		"sikn",
+		"jikn",
+		"anri",
+		"ommu",
+		"ommu-platform",
+		"yii2"
+	],
+	"license": "Apache-2.0",
+	"homepage": "https://bitbucket.org/ommu/archive-location",
+	"support": {
+		"issues": "https://bitbucket.org/ommu/archive-location/issues",
+		"wiki": "https://bitbucket.org/ommu/archive-location/wiki",
+		"source": "https://bitbucket.org/ommu/archive-location"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://bitbucket.org/ommu/archive-location.git"
+	},
+	"authors": [
+		{
+			"name": "Putra Sudaryanto",
+			"email": "putra@ommu.co",
+			"homepage": "https://ommu.co",
+			"role": "Creator"
+		}
+	],
+	"require": {
+		"php": "~7.0",
+		"yiisoft/yii2": "~2.0.13"
+
+	},
+	"autoload": {
+		"psr-4": {
+			"ommu\\archiveLocation\\": ""
+		}
+	}
+}
