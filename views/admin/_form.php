@@ -47,10 +47,10 @@ JS;
 $this->registerJs($js, \yii\web\View::POS_END);
 
 $type = 'building';
-$buildingUrl = Url::to(['location/depo/suggest']);
+$buildingUrl = Url::to(['depo/suggest']);
 if($model->type == 'rack') {
 	$type = 'depo';
-	$buildingUrl = Url::to(['location/room/suggest']);
+	$buildingUrl = Url::to(['room/suggest']);
 }
 $parents = ArchiveLocationBuilding::getLocation(['publish'=>1, 'type'=>$type, 'isDepo'=>($type == 'depo' ? true : false)]);
 echo $form->field($model, 'building')

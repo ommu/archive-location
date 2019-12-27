@@ -385,7 +385,7 @@ class ArchiveLocationBuilding extends \app\components\ActiveRecord
 
 		$model = $model->orderBy('location_name ASC')->all();
 
-		if(isset($data['isDepo'])) {
+		if(isset($data['isDepo']) && $data['isDepo'] == true) {
 			$items = [];
 			foreach ($model as $val) {
 				$items[$val->id] = $val->location_name.', '.$val->parent->location_name;
