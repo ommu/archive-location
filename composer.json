@@ -1,5 +1,5 @@
 {
-	"name": "ommu/archiveLocation",
+	"name": "ommu/archive-location",
 	"description": "Archive location module for OMMU",
 	"type": "ommu-module",
 	"keywords": [
