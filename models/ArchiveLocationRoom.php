@@ -53,7 +53,7 @@ class ArchiveLocationRoom extends \app\components\ActiveRecord
 		return [
 			[['room_id', 'storage_id'], 'required'],
 			[['room_id', 'storage_id', 'creation_id'], 'integer'],
-			[['room_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArchiveLocation::className(), 'targetAttribute' => ['room_id' => 'id']],
+			[['room_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArchiveLocationBuilding::className(), 'targetAttribute' => ['room_id' => 'id']],
 			[['storage_id'], 'exist', 'skipOnError' => true, 'targetClass' => ArchiveLocationStorage::className(), 'targetAttribute' => ['storage_id' => 'id']],
 		];
 	}
@@ -80,7 +80,7 @@ class ArchiveLocationRoom extends \app\components\ActiveRecord
 	 */
 	public function getRoom()
 	{
-		return $this->hasOne(ArchiveLocation::className(), ['id' => 'room_id']);
+		return $this->hasOne(ArchiveLocationBuilding::className(), ['id' => 'room_id']);
 	}
 
 	/**
