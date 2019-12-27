@@ -19,8 +19,8 @@ use yii\helpers\Url;
 use app\components\grid\GridView;
 use yii\widgets\Pjax;
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Inventory'), 'url' => ['admin/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Location'), 'url' => ['location/admin/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'SIKS'), 'url' => ['/archive/fond/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Storage Location'), 'url' => ['admin/index']];
 if($parent) {
 	$controller = strtolower($parent->getAttributeLabel('location_name'));
 	if($controller == 'building')

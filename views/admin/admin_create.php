@@ -16,8 +16,8 @@
 
 use yii\helpers\Url;
 
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Inventory'), 'url' => ['admin/index']];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Location'), 'url' => ['location/admin/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'SIKS'), 'url' => ['/archive/fond/index']];
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Storage Location'), 'url' => ['admin/index']];
 if(isset($model->parent)) {
 	$controller = $model->parent->type;
 	if($controller == 'building')
