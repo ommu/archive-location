@@ -276,7 +276,7 @@ class ArchiveLocationBuilding extends \app\components\ActiveRecord
 						$controller = 'room';
 					if($this->type == 'room')
 						$controller = 'rack';
-					return Html::a($childs, ['location/'.$controller.'/manage', 'parent'=>$model->primaryKey], ['title'=>Yii::t('app', '{count} {title}', ['count'=>$childs, 'title'=>$controller]), 'data-pjax'=>0]);
+					return Html::a($childs, [$controller.'/manage', 'parent'=>$model->primaryKey], ['title'=>Yii::t('app', '{count} {title}', ['count'=>$childs, 'title'=>$controller]), 'data-pjax'=>0]);
 				},
 				'filter' => false,
 				'contentOptions' => ['class'=>'center'],
