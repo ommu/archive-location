@@ -1,0 +1,33 @@
+<?php
+/**
+ * m200209_210100_archive_location_module_insert_storage
+ * 
+ * @author Putra Sudaryanto <putra@ommu.co>
+ * @contact (+62)856-299-4114
+ * @copyright Copyright (c) 2020 OMMU (www.ommu.co)
+ * @created date 9 February 2020, 21:02 WIB
+ * @link https://bitbucket.org/ommu/archive-location
+ *
+ */
+
+use Yii;
+use app\models\SourceMessage;
+
+class m200209_210100_archive_location_module_insert_storage extends \yii\db\Migration
+{
+	public function up()
+	{
+		$tableName = Yii::$app->db->tablePrefix . 'ommu_archive_location_storage';
+		if(Yii::$app->db->getTableSchema($tableName, true)) {
+			$this->batchInsert('ommu_archive_location_storage', ['parent_id', 'storage_name', 'storage_desc'], [
+				[null, SourceMessage::setMessage('Box'), null],
+				[null, SourceMessage::setMessage('Cardboard Box'), null],
+				[null, SourceMessage::setMessage('Hollinger Box'), null],
+				[null, SourceMessage::setMessage('Folder'), null],
+				[null, SourceMessage::setMessage('Filing Cabinet'), null],
+				[null, SourceMessage::setMessage('Map Cabinet'), null],
+				[null, SourceMessage::setMessage('Shelf'), null],
+			]);
+		}
+	}
+}

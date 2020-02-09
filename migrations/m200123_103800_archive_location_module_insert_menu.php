@@ -11,7 +11,6 @@
  */
 
 use Yii;
-use app\models\Menu;
 
 class m200123_103800_archive_location_module_insert_menu extends \yii\db\Migration
 {
