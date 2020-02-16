@@ -182,7 +182,7 @@ class ArchiveLocations extends \app\components\ActiveRecord
 		$this->templateColumns['_no'] = [
 			'header' => '#',
 			'class' => 'yii\grid\SerialColumn',
-			'contentOptions' => ['class'=>'center'],
+			'contentOptions' => ['class'=>'text-center'],
 		];
 		$this->templateColumns['archiveTitle'] = [
 			'attribute' => 'archiveTitle',
