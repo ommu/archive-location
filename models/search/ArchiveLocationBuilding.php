@@ -4,9 +4,9 @@
  *
  * ArchiveLocationBuilding represents the model behind the search form about `ommu\archiveLocation\models\ArchiveLocationBuilding`.
  *
- * @author Putra Sudaryanto <putra@ommu.co>
+ * @author Putra Sudaryanto <putra@ommu.id>
  * @contact (+62)856-299-4114
- * @copyright Copyright (c) 2019 OMMU (www.ommu.co)
+ * @copyright Copyright (c) 2019 OMMU (www.ommu.id)
  * @created date 8 April 2019, 08:42 WIB
  * @link https://bitbucket.org/ommu/archive-location
  *
