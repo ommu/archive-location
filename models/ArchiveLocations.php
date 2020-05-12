@@ -35,7 +35,7 @@ namespace ommu\archiveLocation\models;
 
 use Yii;
 use ommu\archive\models\Archives;
-use ommu\users\models\Users;
+use app\models\Users;
 
 class ArchiveLocations extends \app\components\ActiveRecord
 {
