@@ -45,8 +45,9 @@ class AdminController extends Controller
 	 */
 	public function init()
 	{
-		parent::init();
-		$this->subMenu = $this->module->params['location_submenu'];
+        parent::init();
+
+        $this->subMenu = $this->module->params['location_submenu'];
 
 		$setting = ArchiveSetting::find()
 			->select(['breadcrumb_param'])
@@ -61,18 +62,18 @@ class AdminController extends Controller
 	 */
 	public function behaviors()
 	{
-		return [
-			'access' => [
-				'class' => AccessControl::className(),
-			],
-			'verbs' => [
-				'class' => VerbFilter::className(),
-				'actions' => [
-					'delete' => ['POST'],
-					'publish' => ['POST'],
-				],
-			],
-		];
+        return [
+            'access' => [
+                'class' => AccessControl::className(),
+            ],
+            'verbs' => [
+                'class' => VerbFilter::className(),
+                'actions' => [
+                    'delete' => ['POST'],
+                    'publish' => ['POST'],
+                ],
+            ],
+        ];
 	}
 
 	/**
@@ -80,7 +81,7 @@ class AdminController extends Controller
 	 */
 	public function actionIndex()
 	{
-		return $this->redirect(['manage']);
+        return $this->redirect(['manage']);
 	}
 
 	/**
@@ -90,7 +91,7 @@ class AdminController extends Controller
 	public function actionManage()
 	{
         $searchModel = new ArchiveLocationBuildingSearch(['type'=>$this->type]);
-		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         $gridColumn = Yii::$app->request->get('GridColumn', null);
         $cols = [];
@@ -104,7 +105,7 @@ class AdminController extends Controller
         $columns = $searchModel->getGridColumn($cols);
 
         if (($parent = Yii::$app->request->get('parent')) != null) {
-			$parent = ArchiveLocationBuilding::findOne($parent);
+            $parent = ArchiveLocationBuilding::findOne($parent);
             if ($parent->type == 'building') {
 				$attributes = ['location_name'=>$parent::getType($parent::TYPE_BUILDING), 'id'=>$parent::getType($parent::TYPE_DEPO)];
             } else if ($parent->type == 'depo') {
@@ -136,7 +137,7 @@ class AdminController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model = new ArchiveLocationBuilding();
+        $model = new ArchiveLocationBuilding();
 		$attributes = ['location_name'=>$this->title];
         if ($this->type == 'depo') {
 			$attributes = ArrayHelper::merge($attributes, ['parent_id'=>ArchiveLocationBuilding::getType(ArchiveLocationBuilding::TYPE_BUILDING)]);
@@ -161,30 +162,30 @@ class AdminController extends Controller
 		}
 
         if (($id = Yii::$app->request->get('id')) != null) {
-			$model->parent_id = $id;
+            $model->parent_id = $id;
         }
 		$model->building = $model->parent->parent_id;
 		$model->type = $this->type;
 
         if (Yii::$app->request->isPost) {
-			$model->load(Yii::$app->request->post());
-			// $postData = Yii::$app->request->post();
-			// $model->load($postData);
-			// $model->order = $postData['order'] ? $postData['order'] : 0;
+            $model->load(Yii::$app->request->post());
+            // $postData = Yii::$app->request->post();
+            // $model->load($postData);
+            // $model->order = $postData['order'] ? $postData['order'] : 0;
 
             if ($model->save()) {
-				Yii::$app->session->setFlash('success', Yii::t('app', 'Physical storage {title} success created.', ['title'=>strtolower($this->title)]));
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Physical storage {title} success created.', ['title'=>strtolower($this->title)]));
                 if (!Yii::$app->request->isAjax) {
                     return $this->redirect(['manage']);
                 }
-				return $this->redirect(Yii::$app->request->referrer ?: ['manage']);
+                return $this->redirect(Yii::$app->request->referrer ?: ['manage']);
 
             } else {
                 if (Yii::$app->request->isAjax) {
                     return \yii\helpers\Json::encode(\app\components\widgets\ActiveForm::validate($model));
                 }
-			}
-		}
+            }
+        }
 
 		$this->view->title = Yii::t('app', 'Create {title}', ['title' => $this->title]);
 		$this->view->description = '';
@@ -213,24 +214,24 @@ class AdminController extends Controller
 		}
 
         if (Yii::$app->request->isPost) {
-			$model->load(Yii::$app->request->post());
-			// $postData = Yii::$app->request->post();
-			// $model->load($postData);
-			// $model->order = $postData['order'] ? $postData['order'] : 0;
+            $model->load(Yii::$app->request->post());
+            // $postData = Yii::$app->request->post();
+            // $model->load($postData);
+            // $model->order = $postData['order'] ? $postData['order'] : 0;
 
             if ($model->save()) {
-				Yii::$app->session->setFlash('success', Yii::t('app', 'Physical storage {title} success updated.', ['title'=>strtolower($this->title)]));
+                Yii::$app->session->setFlash('success', Yii::t('app', 'Physical storage {title} success updated.', ['title'=>strtolower($this->title)]));
                 if (!Yii::$app->request->isAjax) {
                     return $this->redirect(['manage']);
                 }
-				return $this->redirect(Yii::$app->request->referrer ?: ['manage']);
+                return $this->redirect(Yii::$app->request->referrer ?: ['manage']);
 
             } else {
                 if (Yii::$app->request->isAjax) {
                     return \yii\helpers\Json::encode(\app\components\widgets\ActiveForm::validate($model));
                 }
-			}
-		}
+            }
+        }
 
 		$this->view->title = Yii::t('app', 'Update {title}: {location-name}', ['title' => $this->title, 'location-name' => $model->location_name]);
 		$this->view->description = '';
@@ -247,7 +248,7 @@ class AdminController extends Controller
 	 */
 	public function actionView($id)
 	{
-		$model = $this->findModel($id);
+        $model = $this->findModel($id);
 
 		$this->view->title = Yii::t('app', 'Detail {title}: {location-name}', ['title' => $this->title, 'location-name' => $model->location_name]);
 		$this->view->description = '';
