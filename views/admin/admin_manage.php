@@ -20,13 +20,15 @@ use app\components\grid\GridView;
 use yii\widgets\Pjax;
 
 $context = $this->context;
-if($context->breadcrumbApp)
-	$this->params['breadcrumbs'][] = ['label' => $context->breadcrumbAppParam['name'], 'url' => [$context->breadcrumbAppParam['url']]];
+if ($context->breadcrumbApp) {
+    $this->params['breadcrumbs'][] = ['label' => $context->breadcrumbAppParam['name'], 'url' => [$context->breadcrumbAppParam['url']]];
+}
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Storage Location'), 'url' => ['admin/index']];
-if($parent) {
+if ($parent) {
 	$controller = strtolower($parent->getAttributeLabel('location_name'));
-	if($controller == 'building')
-		$controller = 'admin';
+    if ($controller == 'building') {
+        $controller = 'admin';
+    }
 	$this->params['breadcrumbs'][] = ['label' => $parent->getAttributeLabel('location_name').': '.$parent->location_name, 'url' => ['location/'.$controller.'/view', 'id'=>$parent->id]];
 	$this->params['breadcrumbs'][] = $parent->getAttributeLabel('id');
 } else
@@ -34,8 +36,9 @@ if($parent) {
 
 $context = $this->context;
 $createLocationUrl = Url::to(['create']);
-if($parent)
-	$createLocationUrl = Url::to(['create', 'id'=>$parent->id]);
+if ($parent) {
+    $createLocationUrl = Url::to(['create', 'id'=>$parent->id]);
+}
 $this->params['menu']['content'] = [
 	['label' => Yii::t('app', 'Add {title}', ['title'=>$context->title]), 'url' => $createLocationUrl, 'icon' => 'plus-square', 'htmlOptions' => ['class'=>'btn modal-btn btn-success']],
 ];
@@ -58,12 +61,15 @@ array_push($columnData, [
 	'class' => 'app\components\grid\ActionColumn',
 	'header' => Yii::t('app', 'Option'),
 	'urlCreator' => function($action, $model, $key, $index) {
-		if($action == 'view')
-			return Url::to(['view', 'id'=>$key]);
-		if($action == 'update')
-			return Url::to(['update', 'id'=>$key]);
-		if($action == 'delete')
-			return Url::to(['delete', 'id'=>$key]);
+        if ($action == 'view') {
+            return Url::to(['view', 'id'=>$key]);
+        }
+        if ($action == 'update') {
+            return Url::to(['update', 'id'=>$key]);
+        }
+        if ($action == 'delete') {
+            return Url::to(['delete', 'id'=>$key]);
+        }
 	},
 	'buttons' => [
 		'view' => function ($url, $model, $key) {

@@ -65,19 +65,19 @@ class RoomController extends AdminController
 	/**
 	 * {@inheritdoc}
 	 */
-	public function actionStorage() 
+	public function actionStorage()
 	{
 		Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
 		$id = Yii::$app->request->get('id');
 
-		if($id == null) return [];
+        if ($id == null) return [];
 
 		$model = ArchiveLocationBuilding::findOne($id);
 
 		$result = [];
-		if(!empty($storage = $model->getRoomStorage(true, 'title'))) {
-			foreach($storage as $key => $val) {
+        if (!empty($storage = $model->getRoomStorage(true, 'title'))) {
+            foreach ($storage as $key => $val) {
 				$result[] = [
 					'id' => $key,
 					'label' => $val,

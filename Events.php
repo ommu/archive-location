@@ -30,9 +30,9 @@ class Events extends \yii\base\BaseObject
 		$storage = $location->storage;
 
 		// insert difference storage
-		if(is_array($storage)) {
+        if (is_array($storage)) {
 			foreach ($storage as $val) {
-				if(in_array($val, $oldStorage)) {
+                if (in_array($val, $oldStorage)) {
 					unset($oldStorage[array_keys($oldStorage, $val)[0]]);
 					continue;
 				}
@@ -45,7 +45,7 @@ class Events extends \yii\base\BaseObject
 		}
 
 		// drop difference storage
-		if(!empty($oldStorage)) {
+        if (!empty($oldStorage)) {
 			foreach ($oldStorage as $key => $val) {
 				ArchiveLocationRoom::find()
 					->select(['id'])

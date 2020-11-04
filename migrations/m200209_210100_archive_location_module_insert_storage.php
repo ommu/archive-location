@@ -18,7 +18,7 @@ class m200209_210100_archive_location_module_insert_storage extends \yii\db\Migr
 	public function up()
 	{
 		$tableName = Yii::$app->db->tablePrefix . 'ommu_archive_location_storage';
-		if(Yii::$app->db->getTableSchema($tableName, true)) {
+        if (Yii::$app->db->getTableSchema($tableName, true)) {
 			$this->batchInsert('ommu_archive_location_storage', ['parent_id', 'storage_name', 'storage_desc'], [
 				[null, SourceMessage::setMessage('Box'), null],
 				[null, SourceMessage::setMessage('Cardboard Box'), null],

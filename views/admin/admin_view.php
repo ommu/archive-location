@@ -18,18 +18,19 @@ use yii\helpers\Url;
 use yii\widgets\DetailView;
 use ommu\archiveLocation\models\ArchiveLocationBuilding;
 
-if(!$small) {
-$context = $this->context;
-if($context->breadcrumbApp)
-	$this->params['breadcrumbs'][] = ['label' => $context->breadcrumbAppParam['name'], 'url' => [$context->breadcrumbAppParam['url']]];
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Storage Location'), 'url' => ['admin/index']];
-$this->params['breadcrumbs'][] = ['label' => $model->getAttributeLabel('location_name'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $model->location_name;
+if (!$small) {
+    $context = $this->context;
+    if ($context->breadcrumbApp) {
+        $this->params['breadcrumbs'][] = ['label' => $context->breadcrumbAppParam['name'], 'url' => [$context->breadcrumbAppParam['url']]];
+    }
+    $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Storage Location'), 'url' => ['admin/index']];
+    $this->params['breadcrumbs'][] = ['label' => $model->getAttributeLabel('location_name'), 'url' => ['index']];
+    $this->params['breadcrumbs'][] = $model->location_name;
 
-$this->params['menu']['content'] = [
-	['label' => Yii::t('app', 'Update'), 'url' => Url::to(['update', 'id'=>$model->id]), 'icon' => 'pencil', 'htmlOptions' => ['class'=>'btn btn-primary']],
-	['label' => Yii::t('app', 'Delete'), 'url' => Url::to(['delete', 'id'=>$model->id]), 'htmlOptions' => ['data-confirm'=>Yii::t('app', 'Are you sure you want to delete this item?'), 'data-method'=>'post', 'class'=>'btn btn-danger'], 'icon' => 'trash'],
-];
+    $this->params['menu']['content'] = [
+        ['label' => Yii::t('app', 'Update'), 'url' => Url::to(['update', 'id'=>$model->id]), 'icon' => 'pencil', 'htmlOptions' => ['class'=>'btn btn-primary']],
+        ['label' => Yii::t('app', 'Delete'), 'url' => Url::to(['delete', 'id'=>$model->id]), 'htmlOptions' => ['data-confirm'=>Yii::t('app', 'Are you sure you want to delete this item?'), 'data-method'=>'post', 'class'=>'btn btn-danger'], 'icon' => 'trash'],
+    ];
 } ?>
 
 <div class="archive-location-view">
@@ -54,8 +55,9 @@ $attributes = [
 	[
 		'attribute' => 'parent_id',
 		'value' => function ($model) {
-			if($model->type == 'room')
-				return isset($model->parent) ? $model->parent->location_name.', '.$model->parent->parent->location_name : '-';
+            if ($model->type == 'room') {
+                return isset($model->parent) ? $model->parent->location_name.', '.$model->parent->parent->location_name : '-';
+            }
 			return isset($model->parent) ? $model->parent->location_name : '-';
 		},
 		'visible' => $model->type != 'building' ? true : false,

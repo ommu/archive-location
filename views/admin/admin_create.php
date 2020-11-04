@@ -17,13 +17,15 @@
 use yii\helpers\Url;
 
 $context = $this->context;
-if($context->breadcrumbApp)
-	$this->params['breadcrumbs'][] = ['label' => $context->breadcrumbAppParam['name'], 'url' => [$context->breadcrumbAppParam['url']]];
+if ($context->breadcrumbApp) {
+    $this->params['breadcrumbs'][] = ['label' => $context->breadcrumbAppParam['name'], 'url' => [$context->breadcrumbAppParam['url']]];
+}
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Storage Location'), 'url' => ['admin/index']];
-if(isset($model->parent)) {
+if (isset($model->parent)) {
 	$controller = $model->parent->type;
-	if($controller == 'building')
-		$controller = 'admin';
+    if ($controller == 'building') {
+        $controller = 'admin';
+    }
 	$this->params['breadcrumbs'][] = ['label' => $model->getAttributeLabel('parent_id').': '.$model->parent->location_name, 'url' => ['location/'.$controller.'/view', 'id'=>$model->parent_id]];
 }
 $this->params['breadcrumbs'][] = ['label' => $model->getAttributeLabel('location_name'), 'url' => ['index']];

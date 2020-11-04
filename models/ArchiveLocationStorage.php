@@ -105,12 +105,13 @@ class ArchiveLocationStorage extends \app\components\ActiveRecord
 	 */
 	public function getRooms($count=false)
 	{
-		if($count == false)
-			return $this->hasMany(ArchiveLocationRoom::className(), ['storage_id' => 'id']);
+        if ($count == false) {
+            return $this->hasMany(ArchiveLocationRoom::className(), ['storage_id' => 'id']);
+        }
 
 		$model = ArchiveLocationRoom::find()
-			->alias('t')
-			->where(['t.storage_id' => $this->id]);
+            ->alias('t')
+            ->where(['t.storage_id' => $this->id]);
 		$rooms = $model->count();
 
 		return $rooms ? $rooms : 0;
@@ -172,11 +173,13 @@ class ArchiveLocationStorage extends \app\components\ActiveRecord
 	{
 		parent::init();
 
-		if(!(Yii::$app instanceof \app\components\Application))
-			return;
+        if (!(Yii::$app instanceof \app\components\Application)) {
+            return;
+        }
 
-		if(!$this->hasMethod('search'))
-			return;
+        if (!$this->hasMethod('search')) {
+            return;
+        }
 
 		$this->templateColumns['_no'] = [
 			'header' => '#',
@@ -267,36 +270,39 @@ class ArchiveLocationStorage extends \app\components\ActiveRecord
 	 */
 	public static function getInfo($id, $column=null)
 	{
-		if($column != null) {
-			$model = self::find();
-			if(is_array($column))
-				$model->select($column);
-			else
-				$model->select([$column]);
-			$model = $model->where(['id' => $id])->one();
-			return is_array($column) ? $model : $model->$column;
-			
-		} else {
-			$model = self::findOne($id);
-			return $model;
-		}
+        if ($column != null) {
+            $model = self::find();
+            if (is_array($column)) {
+                $model->select($column);
+            } else {
+                $model->select([$column]);
+            }
+            $model = $model->where(['id' => $id])->one();
+            return is_array($column) ? $model : $model->$column;
+
+        } else {
+            $model = self::findOne($id);
+            return $model;
+        }
 	}
 
 	/**
 	 * function getStorage
 	 */
-	public static function getStorage($publish=null, $array=true) 
+	public static function getStorage($publish=null, $array=true)
 	{
 		$model = self::find()->alias('t')
 			->select(['t.id', 't.storage_name']);
 		$model->leftJoin(sprintf('%s title', SourceMessage::tableName()), 't.storage_name=title.id');
-		if($publish != null)
-			$model->andWhere(['t.publish' => $publish]);
+        if ($publish != null) {
+            $model->andWhere(['t.publish' => $publish]);
+        }
 
 		$model = $model->orderBy('title.message ASC')->all();
 
-		if($array == true)
-			return \yii\helpers\ArrayHelper::map($model, 'id', 'storage_name_i');
+        if ($array == true) {
+            return \yii\helpers\ArrayHelper::map($model, 'id', 'storage_name_i');
+        }
 
 		return $model;
 	}
@@ -320,16 +326,18 @@ class ArchiveLocationStorage extends \app\components\ActiveRecord
 	 */
 	public function beforeValidate()
 	{
-		if(parent::beforeValidate()) {
-			if($this->isNewRecord) {
-				if($this->creation_id == null)
-					$this->creation_id = !Yii::$app->user->isGuest ? Yii::$app->user->id : null;
-			} else {
-				if($this->modified_id == null)
-					$this->modified_id = !Yii::$app->user->isGuest ? Yii::$app->user->id : null;
-			}
-		}
-		return true;
+        if (parent::beforeValidate()) {
+            if ($this->isNewRecord) {
+                if ($this->creation_id == null) {
+                    $this->creation_id = !Yii::$app->user->isGuest ? Yii::$app->user->id : null;
+                }
+            } else {
+                if ($this->modified_id == null) {
+                    $this->modified_id = !Yii::$app->user->isGuest ? Yii::$app->user->id : null;
+                }
+            }
+        }
+        return true;
 	}
 
 	/**
@@ -337,40 +345,41 @@ class ArchiveLocationStorage extends \app\components\ActiveRecord
 	 */
 	public function beforeSave($insert)
 	{
-		$module = strtolower(Yii::$app->controller->module->id);
-		$controller = strtolower(Yii::$app->controller->id);
-		$action = strtolower(Yii::$app->controller->action->id);
+        $module = strtolower(Yii::$app->controller->module->id);
+        $controller = strtolower(Yii::$app->controller->id);
+        $action = strtolower(Yii::$app->controller->action->id);
 
-		$location = Inflector::slug($module.' '.$controller);
+        $location = Inflector::slug($module.' '.$controller);
 
-		if(parent::beforeSave($insert)) {
-			if($insert || (!$insert && !$this->storage_name)) {
-				$storage_name = new SourceMessage();
-				$storage_name->location = $location.'_title';
-				$storage_name->message = $this->storage_name_i;
-				if($storage_name->save())
-					$this->storage_name = $storage_name->id;
+        if (parent::beforeSave($insert)) {
+            if ($insert || (!$insert && !$this->storage_name)) {
+                $storage_name = new SourceMessage();
+                $storage_name->location = $location.'_title';
+                $storage_name->message = $this->storage_name_i;
+                if ($storage_name->save()) {
+                    $this->storage_name = $storage_name->id;
+                }
 
-			} else {
-				$storage_name = SourceMessage::findOne($this->storage_name);
-				$storage_name->message = $this->storage_name_i;
-				$storage_name->save();
-			}
+            } else {
+                $storage_name = SourceMessage::findOne($this->storage_name);
+                $storage_name->message = $this->storage_name_i;
+                $storage_name->save();
+            }
 
-			if($insert || (!$insert && !$this->storage_desc)) {
-				$storage_desc = new SourceMessage();
-				$storage_desc->location = $location.'_description';
-				$storage_desc->message = $this->storage_desc_i;
-				if($storage_desc->save())
-					$this->storage_desc = $storage_desc->id;
+            if ($insert || (!$insert && !$this->storage_desc)) {
+                $storage_desc = new SourceMessage();
+                $storage_desc->location = $location.'_description';
+                $storage_desc->message = $this->storage_desc_i;
+                if ($storage_desc->save()) {
+                    $this->storage_desc = $storage_desc->id;
+                }
 
-			} else {
-				$storage_desc = SourceMessage::findOne($this->storage_desc);
-				$storage_desc->message = $this->storage_desc_i;
-				$storage_desc->save();
-			}
-
-		}
-		return true;
+            } else {
+                $storage_desc = SourceMessage::findOne($this->storage_desc);
+                $storage_desc->message = $this->storage_desc_i;
+                $storage_desc->save();
+            }
+        }
+        return true;
 	}
 }

@@ -17,7 +17,7 @@ class m200123_103800_archive_location_module_insert_role extends \yii\db\Migrati
 	public function up()
 	{
 		$tableName = Yii::$app->db->tablePrefix . 'ommu_core_auth_item';
-		if(Yii::$app->db->getTableSchema($tableName, true)) {
+        if (Yii::$app->db->getTableSchema($tableName, true)) {
 			$this->batchInsert('ommu_core_auth_item', ['name', 'type', 'data', 'created_at'], [
 				['archiveLocationModLevelAdmin', '2', '', time()],
 				['archiveLocationModLevelModerator', '2', '', time()],
@@ -31,7 +31,7 @@ class m200123_103800_archive_location_module_insert_role extends \yii\db\Migrati
 		}
 
 		$tableName = Yii::$app->db->tablePrefix . 'ommu_core_auth_item_child';
-		if(Yii::$app->db->getTableSchema($tableName, true)) {
+        if (Yii::$app->db->getTableSchema($tableName, true)) {
 			$this->batchInsert('ommu_core_auth_item_child', ['parent', 'child'], [
 				['userAdmin', 'archiveLocationModLevelAdmin'],
 				['userModerator', 'archiveLocationModLevelModerator'],

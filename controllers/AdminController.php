@@ -89,33 +89,36 @@ class AdminController extends Controller
 	 */
 	public function actionManage()
 	{
-		$searchModel = new ArchiveLocationBuildingSearch(['type'=>$this->type]);
+        $searchModel = new ArchiveLocationBuildingSearch(['type'=>$this->type]);
 		$dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
-		$gridColumn = Yii::$app->request->get('GridColumn', null);
-		$cols = [];
-		if($gridColumn != null && count($gridColumn) > 0) {
-			foreach($gridColumn as $key => $val) {
-				if($gridColumn[$key] == 1)
-					$cols[] = $key;
-			}
-		}
-		$columns = $searchModel->getGridColumn($cols);
+        $gridColumn = Yii::$app->request->get('GridColumn', null);
+        $cols = [];
+        if ($gridColumn != null && count($gridColumn) > 0) {
+            foreach ($gridColumn as $key => $val) {
+                if ($gridColumn[$key] == 1) {
+                    $cols[] = $key;
+                }
+            }
+        }
+        $columns = $searchModel->getGridColumn($cols);
 
-		if(($parent = Yii::$app->request->get('parent')) != null) {
+        if (($parent = Yii::$app->request->get('parent')) != null) {
 			$parent = ArchiveLocationBuilding::findOne($parent);
-			if($parent->type == 'building')
+            if ($parent->type == 'building') {
 				$attributes = ['location_name'=>$parent::getType($parent::TYPE_BUILDING), 'id'=>$parent::getType($parent::TYPE_DEPO)];
-			else if($parent->type == 'depo')
+            } else if ($parent->type == 'depo') {
 				$attributes = ['location_name'=>$parent::getType($parent::TYPE_DEPO), 'id'=>$parent::getType($parent::TYPE_ROOM)];
-			else if($parent->type == 'room')
+            } else if ($parent->type == 'room') {
 				$attributes = ['location_name'=>$parent::getType($parent::TYPE_ROOM), 'id'=>$parent::getType($parent::TYPE_RACK)];
+            }
 			$parent->setAttributeLabels($attributes);
 		}
 
 		$this->view->title = Yii::t('app', Inflector::pluralize($this->title));
-		if($parent)
+        if ($parent) {
 			$this->view->title = Yii::t('app', '{location} in {parent}: {parent-name}', ['location'=>Inflector::pluralize($this->title), 'parent'=>$parent->getAttributeLabel('location_name'), 'parent-name'=>$parent->location_name]);
+        }
 		$this->view->description = '';
 		$this->view->keywords = '';
 		return $this->render('admin_manage', [
@@ -135,11 +138,11 @@ class AdminController extends Controller
 	{
 		$model = new ArchiveLocationBuilding();
 		$attributes = ['location_name'=>$this->title];
-		if($this->type == 'depo')
+        if ($this->type == 'depo') {
 			$attributes = ArrayHelper::merge($attributes, ['parent_id'=>ArchiveLocationBuilding::getType(ArchiveLocationBuilding::TYPE_BUILDING)]);
-		else if($this->type == 'room')
+        } else if ($this->type == 'room') {
 			$attributes = ArrayHelper::merge($attributes, ['parent_id'=>ArchiveLocationBuilding::getType(ArchiveLocationBuilding::TYPE_DEPO)]);
-		else if($this->type == 'rack') {
+        } else if ($this->type == 'rack') {
 			$attributes = ['location_name'=>Yii::t('app', '{rack} Number', ['rack'=>$this->title])];
 			$attributes = ArrayHelper::merge($attributes, [
 				'parent_id'=>ArchiveLocationBuilding::getType(ArchiveLocationBuilding::TYPE_ROOM),
@@ -148,34 +151,38 @@ class AdminController extends Controller
 		}
 		$model->setAttributeLabels($attributes);
 
-		if($this->type != 'building') {
+        if ($this->type != 'building') {
 			$model->scenario = ArchiveLocationBuilding::SCENARIO_NOT_BUILDING;
-			if($this->type == 'room')
+            if ($this->type == 'room') {
 				$model->scenario = ArchiveLocationBuilding::SCENARIO_ROOM;
-			else if($this->type == 'rack')
+            } else if ($this->type == 'rack') {
 				$model->scenario = ArchiveLocationBuilding::SCENARIO_RACK;
+            }
 		}
 
-		if(($id = Yii::$app->request->get('id')) != null)
+        if (($id = Yii::$app->request->get('id')) != null) {
 			$model->parent_id = $id;
+        }
 		$model->building = $model->parent->parent_id;
 		$model->type = $this->type;
 
-		if(Yii::$app->request->isPost) {
+        if (Yii::$app->request->isPost) {
 			$model->load(Yii::$app->request->post());
 			// $postData = Yii::$app->request->post();
 			// $model->load($postData);
 			// $model->order = $postData['order'] ? $postData['order'] : 0;
 
-			if($model->save()) {
+            if ($model->save()) {
 				Yii::$app->session->setFlash('success', Yii::t('app', 'Physical storage {title} success created.', ['title'=>strtolower($this->title)]));
-				if(!Yii::$app->request->isAjax)
-					return $this->redirect(['manage']);
+                if (!Yii::$app->request->isAjax) {
+                    return $this->redirect(['manage']);
+                }
 				return $this->redirect(Yii::$app->request->referrer ?: ['manage']);
 
-			} else {
-				if(Yii::$app->request->isAjax)
-					return \yii\helpers\Json::encode(\app\components\widgets\ActiveForm::validate($model));
+            } else {
+                if (Yii::$app->request->isAjax) {
+                    return \yii\helpers\Json::encode(\app\components\widgets\ActiveForm::validate($model));
+                }
 			}
 		}
 
@@ -196,29 +203,32 @@ class AdminController extends Controller
 	public function actionUpdate($id)
 	{
 		$model = $this->findModel($id);
-		if($this->type != 'building') {
+        if ($this->type != 'building') {
 			$model->scenario = ArchiveLocationBuilding::SCENARIO_NOT_BUILDING;
-			if($this->type == 'room')
+            if ($this->type == 'room') {
 				$model->scenario = ArchiveLocationBuilding::SCENARIO_ROOM;
-			else if($this->type == 'rack')
+            } else if ($this->type == 'rack') {
 				$model->scenario = ArchiveLocationBuilding::SCENARIO_RACK;
+            }
 		}
 
-		if(Yii::$app->request->isPost) {
+        if (Yii::$app->request->isPost) {
 			$model->load(Yii::$app->request->post());
 			// $postData = Yii::$app->request->post();
 			// $model->load($postData);
 			// $model->order = $postData['order'] ? $postData['order'] : 0;
 
-			if($model->save()) {
+            if ($model->save()) {
 				Yii::$app->session->setFlash('success', Yii::t('app', 'Physical storage {title} success updated.', ['title'=>strtolower($this->title)]));
-				if(!Yii::$app->request->isAjax)
-					return $this->redirect(['manage']);
+                if (!Yii::$app->request->isAjax) {
+                    return $this->redirect(['manage']);
+                }
 				return $this->redirect(Yii::$app->request->referrer ?: ['manage']);
 
-			} else {
-				if(Yii::$app->request->isAjax)
-					return \yii\helpers\Json::encode(\app\components\widgets\ActiveForm::validate($model));
+            } else {
+                if (Yii::$app->request->isAjax) {
+                    return \yii\helpers\Json::encode(\app\components\widgets\ActiveForm::validate($model));
+                }
 			}
 		}
 
@@ -258,7 +268,7 @@ class AdminController extends Controller
 		$model = $this->findModel($id);
 		$model->publish = 2;
 
-		if($model->save(false, ['publish','modified_id'])) {
+        if ($model->save(false, ['publish', 'modified_id'])) {
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Physical storage {title} success deleted.', ['title'=>strtolower($this->title)]));
 			return $this->redirect(Yii::$app->request->referrer ?: ['manage']);
 		}
@@ -276,7 +286,7 @@ class AdminController extends Controller
 		$replace = $model->publish == 1 ? 0 : 1;
 		$model->publish = $replace;
 
-		if($model->save(false, ['publish','modified_id'])) {
+        if ($model->save(false, ['publish', 'modified_id'])) {
 			Yii::$app->session->setFlash('success', Yii::t('app', 'Physical storage {title} success updated.', ['title'=>strtolower($this->title)]));
 			return $this->redirect(Yii::$app->request->referrer ?: ['manage']);
 		}
@@ -291,12 +301,14 @@ class AdminController extends Controller
 	 */
 	protected function findModel($id)
 	{
-		if(($model = ArchiveLocationBuilding::findOne($id)) !== null) {
+        if (($model = ArchiveLocationBuilding::findOne($id)) !== null) {
 			$attributes = ['location_name'=>$this->title];
-			if($model->type == 'depo')
+            if ($model->type == 'depo') {
 				$attributes = ArrayHelper::merge($attributes, ['parent_id'=>ArchiveLocationBuilding::getType(ArchiveLocationBuilding::TYPE_BUILDING)]);
-			if($model->type == 'room')
+            }
+            if ($model->type == 'room') {
 				$attributes = ArrayHelper::merge($attributes, ['parent_id'=>ArchiveLocationBuilding::getType(ArchiveLocationBuilding::TYPE_DEPO)]);
+            }
 			$model->setAttributeLabels($attributes);
 
 			return $model;

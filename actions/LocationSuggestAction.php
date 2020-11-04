@@ -23,11 +23,11 @@ class LocationSuggestAction extends \yii\base\Action
 	 */
 	protected function beforeRun()
 	{
-		if (parent::beforeRun()) {
+        if (parent::beforeRun()) {
 			Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 			Yii::$app->response->charset = 'UTF-8';
-		}
-		return true;
+        }
+        return true;
 	}
 
 	/**
@@ -37,17 +37,17 @@ class LocationSuggestAction extends \yii\base\Action
 	{
 		$parent = Yii::$app->request->get('parent');
 
-		if($parent == null) return [];
+        if ($parent == null) return [];
 
 		$model = ArchiveLocationBuilding::find()
-			->alias('t')
+            ->alias('t')
 			->suggest()
 			->andWhere(['t.parent_id' => $parent])
 			->andWhere(['t.type' => $this->type])
 			->all();
 
 		$result = [];
-		foreach($model as $val) {
+        foreach ($model as $val) {
 			$result[] = [
 				'id' => $val->id, 
 				'label' => $val->location_name,

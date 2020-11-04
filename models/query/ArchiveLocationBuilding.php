@@ -27,7 +27,7 @@ class ArchiveLocationBuilding extends \yii\db\ActiveQuery
 	/**
 	 * {@inheritdoc}
 	 */
-	public function published() 
+	public function published()
 	{
 		return $this->andWhere(['t.publish' => 1]);
 	}
@@ -35,7 +35,7 @@ class ArchiveLocationBuilding extends \yii\db\ActiveQuery
 	/**
 	 * {@inheritdoc}
 	 */
-	public function unpublish() 
+	public function unpublish()
 	{
 		return $this->andWhere(['t.publish' => 0]);
 	}
@@ -43,7 +43,7 @@ class ArchiveLocationBuilding extends \yii\db\ActiveQuery
 	/**
 	 * {@inheritdoc}
 	 */
-	public function deleted() 
+	public function deleted()
 	{
 		return $this->andWhere(['t.publish' => 2]);
 	}
@@ -60,7 +60,7 @@ class ArchiveLocationBuilding extends \yii\db\ActiveQuery
 	/**
 	 * {@inheritdoc}
 	 */
-	public function suggest() 
+	public function suggest()
 	{
 		return $this->select(['id', 'location_name'])
 			->published();
