@@ -33,7 +33,7 @@ use ommu\archiveLocation\models\ArchiveLocationBuilding;
 
 		<?php $type = ArchiveLocationBuilding::getType();
 			echo $form->field($model, 'type')
-			->dropDownList($type, ['prompt'=>'']);?>
+			->dropDownList($type, ['prompt' => '']);?>
 
 		<?php echo $form->field($model, 'location_name');?>
 
@@ -53,7 +53,7 @@ use ommu\archiveLocation\models\ArchiveLocationBuilding;
 			->input('date');?>
 
 		<?php echo $form->field($model, 'publish')
-			->dropDownList($model->filterYesNo(), ['prompt'=>'']);?>
+			->dropDownList($model->filterYesNo(), ['prompt' => '']);?>
 
 		<div class="form-group">
 			<?php echo Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']); ?>

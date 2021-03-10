@@ -26,7 +26,7 @@ if (isset($model->parent)) {
     if ($controller == 'building') {
         $controller = 'admin';
     }
-	$this->params['breadcrumbs'][] = ['label' => $model->getAttributeLabel('parent_id').': '.$model->parent->location_name, 'url' => ['location/'.$controller.'/view', 'id'=>$model->parent_id]];
+	$this->params['breadcrumbs'][] = ['label' => $model->getAttributeLabel('parent_id').': '.$model->parent->location_name, 'url' => ['location/'.$controller.'/view', 'id' => $model->parent_id]];
 }
 $this->params['breadcrumbs'][] = ['label' => $model->getAttributeLabel('location_name'), 'url' => ['index']];
 $this->params['breadcrumbs'][] = Yii::t('app', 'Create');

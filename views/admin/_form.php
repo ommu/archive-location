@@ -26,7 +26,7 @@ use yii\helpers\ArrayHelper;
 <div class="archive-location-form">
 
 <?php $form = ActiveForm::begin([
-	'options' => ['class'=>'form-horizontal form-label-left'],
+	'options' => ['class' => 'form-horizontal form-label-left'],
 	'enableClientValidation' => false,
 	'enableAjaxValidation' => false,
 	//'enableClientScript' => true,
@@ -53,14 +53,14 @@ JS;
         $type = 'depo';
         $buildingUrl = Url::to(['room/suggest']);
     }
-    $parents = ArchiveLocationBuilding::getLocation(['publish'=>1, 'type'=>$type, 'isDepo'=>($type == 'depo' ? true : false)]);
+    $parents = ArchiveLocationBuilding::getLocation(['publish' => 1, 'type' => $type, 'isDepo' => ($type == 'depo' ? true : false)]);
     echo $form->field($model, 'building')
         ->widget(Selectize::className(), [
             'cascade' => true,
             'options' => [
                 'placeholder' => Yii::t('app', 'Select a {type}..', ['type' => strtolower($model->getAttributeLabel('building'))]),
             ],
-            'items' => ArrayHelper::merge([''=>Yii::t('app', 'Select a {type}..', ['type' => strtolower($model->getAttributeLabel('building'))])], $parents),
+            'items' => ArrayHelper::merge(['' => Yii::t('app', 'Select a {type}..', ['type' => strtolower($model->getAttributeLabel('building'))])], $parents),
             'pluginOptions' => [
                 'valueField' => 'id',
                 'labelField' => 'label',
@@ -103,7 +103,7 @@ if ($model->type != 'building') {
     } else if ($model->type == 'rack') {
         $type = 'room';
     }
-    $parents = ArchiveLocationBuilding::getLocation(['publish'=>1, 'type'=>$type]);
+    $parents = ArchiveLocationBuilding::getLocation(['publish' => 1, 'type' => $type]);
     $parentPluginOptions = [
         'valueField' => 'id',
         'labelField' => 'label',
@@ -125,20 +125,20 @@ if ($model->type != 'building') {
             'options' => [
                 'placeholder' => Yii::t('app', 'Select a {type}..', ['type' => strtolower($model->getAttributeLabel('parent_id'))]),
             ],
-            'items' => ArrayHelper::merge([''=>Yii::t('app', 'Select a {type}..', ['type' => strtolower($model->getAttributeLabel('parent_id'))])], $parents),
+            'items' => ArrayHelper::merge(['' => Yii::t('app', 'Select a {type}..', ['type' => strtolower($model->getAttributeLabel('parent_id'))])], $parents),
             'pluginOptions' => $parentPluginOptions,
         ])
         ->label($model->getAttributeLabel('parent_id'));
 } ?>
 
 <?php echo $form->field($model, 'location_name')
-	->textInput(['maxlength'=>true])
+	->textInput(['maxlength' => true])
 	->label($model->getAttributeLabel('location_name')); ?>
 
 <?php 
 if ($model->type != 'rack') {
     echo $form->field($model, 'location_desc')
-        ->textarea(['rows'=>4, 'cols'=>50])
+        ->textarea(['rows' => 4, 'cols' => 50])
         ->label($model->getAttributeLabel('location_desc'));
 } ?>
 

@@ -184,7 +184,7 @@ class ArchiveLocations extends \app\components\ActiveRecord
 		$this->templateColumns['_no'] = [
 			'header' => '#',
 			'class' => 'app\components\grid\SerialColumn',
-			'contentOptions' => ['class'=>'text-center'],
+			'contentOptions' => ['class' => 'text-center'],
 		];
 		$this->templateColumns['archiveTitle'] = [
 			'attribute' => 'archiveTitle',

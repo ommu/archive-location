@@ -22,7 +22,7 @@ use ommu\archiveLocation\models\ArchiveLocationStorage;
 <div class="archive-storage-form">
 
 <?php $form = ActiveForm::begin([
-	'options' => ['class'=>'form-horizontal form-label-left'],
+	'options' => ['class' => 'form-horizontal form-label-left'],
 	'enableClientValidation' => true,
 	'enableAjaxValidation' => false,
 	//'enableClientScript' => true,
@@ -37,15 +37,15 @@ use ommu\archiveLocation\models\ArchiveLocationStorage;
 
 <?php $parentId = ArchiveLocationStorage::getStorage();
 echo $form->field($model, 'parent_id')
-	->dropDownList($parentId, ['prompt'=>''])
+	->dropDownList($parentId, ['prompt' => ''])
 	->label($model->getAttributeLabel('parent_id')); ?>
 
 <?php echo $form->field($model, 'storage_name_i')
-	->textInput(['maxlength'=>true])
+	->textInput(['maxlength' => true])
 	->label($model->getAttributeLabel('storage_name_i')); ?>
 
 <?php echo $form->field($model, 'storage_desc_i')
-	->textarea(['rows'=>4, 'cols'=>50, 'maxlength'=>true])
+	->textarea(['rows' => 4, 'cols' => 50, 'maxlength' => true])
 	->label($model->getAttributeLabel('storage_desc_i')); ?>
 
 <?php 

@@ -224,7 +224,7 @@ class ArchiveLocationBuilding extends \app\components\ActiveRecord
 		$this->templateColumns['_no'] = [
 			'header' => '#',
 			'class' => 'app\components\grid\SerialColumn',
-			'contentOptions' => ['class'=>'text-center'],
+			'contentOptions' => ['class' => 'text-center'],
 		];
         if ($this->type != 'building') {
 			$this->templateColumns['parentName'] = [
@@ -283,10 +283,10 @@ class ArchiveLocationBuilding extends \app\components\ActiveRecord
                     if ($this->type == 'room') {
                         $controller = 'rack';
                     }
-					return Html::a($childs, [$controller.'/manage', 'parent'=>$model->primaryKey], ['title'=>Yii::t('app', '{count} {title}', ['count'=>$childs, 'title'=>$controller]), 'data-pjax'=>0]);
+					return Html::a($childs, [$controller.'/manage', 'parent' => $model->primaryKey], ['title' => Yii::t('app', '{count} {title}', ['count' => $childs, 'title' => $controller]), 'data-pjax' => 0]);
 				},
 				'filter' => false,
-				'contentOptions' => ['class'=>'text-center'],
+				'contentOptions' => ['class' => 'text-center'],
 				'format' => 'raw',
 			];
 		}
@@ -330,11 +330,11 @@ class ArchiveLocationBuilding extends \app\components\ActiveRecord
 		$this->templateColumns['publish'] = [
 			'attribute' => 'publish',
 			'value' => function($model, $key, $index, $column) {
-				$url = Url::to(['publish', 'id'=>$model->primaryKey]);
+				$url = Url::to(['publish', 'id' => $model->primaryKey]);
 				return $this->quickAction($url, $model->publish);
 			},
 			'filter' => $this->filterYesNo(),
-			'contentOptions' => ['class'=>'text-center'],
+			'contentOptions' => ['class' => 'text-center'],
 			'format' => 'raw',
 			'visible' => !Yii::$app->request->get('trash') ? true : false,
 		];
@@ -422,8 +422,8 @@ class ArchiveLocationBuilding extends \app\components\ActiveRecord
 
         if ($sep == 'li') {
 			return Html::ul($roomStorage, ['item' => function($item, $index) {
-				return Html::tag('li', Html::a($item, ['setting/storage/view', 'id'=>$index], ['title'=>$item, 'class'=>'modal-btn']));
-			}, 'class'=>'list-boxed']);
+				return Html::tag('li', Html::a($item, ['setting/storage/view', 'id' => $index], ['title' => $item, 'class' => 'modal-btn']));
+			}, 'class' => 'list-boxed']);
 		}
 
 		return implode(', ', $roomStorage);
