@@ -1,6 +1,6 @@
 <?php
 /**
- * m200209_210100_archive_location_module_insert_storage
+ * m210824_145857_archive_location_module_insert_storage
  * 
  * @author Putra Sudaryanto <putra@ommu.id>
  * @contact (+62)856-299-4114
@@ -13,7 +13,7 @@
 use Yii;
 use app\models\SourceMessage;
 
-class m200209_210100_archive_location_module_insert_storage extends \yii\db\Migration
+class m210824_145857_archive_location_module_insert_storage extends \yii\db\Migration
 {
 	public function up()
 	{
