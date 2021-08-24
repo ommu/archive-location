@@ -12,6 +12,7 @@
 
 use Yii;
 use mdm\admin\components\Configs;
+use app\models\Menu;
 
 class m200123_103800_archive_location_module_insert_menu extends \yii\db\Migration
 {
@@ -21,7 +22,7 @@ class m200123_103800_archive_location_module_insert_menu extends \yii\db\Migrati
 		$tableName = Yii::$app->db->tablePrefix . $menuTable;
         if (Yii::$app->db->getTableSchema($tableName, true)) {
 			$this->batchInsert($tableName, ['name', 'module', 'icon', 'parent', 'route', 'order', 'data'], [
-				['Archive Location', 'archive-location', null, null, '/archive-location/admin/index', null, null],
+				['Archive Location', 'archive-location', null, Menu::getParentId('SIKS#archive'), '/archive-location/admin/index', null, null],
 			]);
 		}
 	}
