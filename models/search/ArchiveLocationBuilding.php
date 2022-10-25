@@ -63,7 +63,8 @@ class ArchiveLocationBuilding extends ArchiveLocationBuildingModel
         if (!($column && is_array($column))) {
             $query = ArchiveLocationBuildingModel::find()->alias('t');
         } else {
-            $query = ArchiveLocationBuildingModel::find()->alias('t')->select($column);
+            $query = ArchiveLocationBuildingModel::find()->alias('t')
+                ->select($column);
         }
 		$query->joinWith([
 			'parent parent', 

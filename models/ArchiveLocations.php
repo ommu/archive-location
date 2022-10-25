@@ -146,7 +146,8 @@ class ArchiveLocations extends \app\components\ActiveRecord
 	 */
 	public function getArchive()
 	{
-		return $this->hasOne(Archives::className(), ['id' => 'archive_id']);
+		return $this->hasOne(Archives::className(), ['id' => 'archive_id'])
+            ->select(['id', 'level_id', 'title', 'code']);
 	}
 
 	/**

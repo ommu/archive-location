@@ -23,11 +23,12 @@ $context = $this->context;
 if ($context->breadcrumbApp) {
     $this->params['breadcrumbs'][] = ['label' => $context->breadcrumbAppParam['name'], 'url' => [$context->breadcrumbAppParam['url']]];
 }
+$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Setting'), 'url' => ['/archive/setting/admin/index']];
 $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Physical Storage'), 'url' => ['admin/index']];
 $this->params['breadcrumbs'][] = $this->title;
 
 $this->params['menu']['content'] = [
-	['label' => Yii::t('app', 'Add Storage'), 'url' => Url::to(['create']), 'icon' => 'plus-square', 'htmlOptions' => ['class' => 'btn btn-primary modal-btn']],
+	['label' => Yii::t('app', 'Add Storage'), 'url' => Url::to(['create']), 'icon' => 'plus-square', 'htmlOptions' => ['class' => 'btn btn-success modal-btn']],
 ];
 $this->params['menu']['option'] = [
 	//['label' => Yii::t('app', 'Search'), 'url' => 'javascript:void(0);'],
