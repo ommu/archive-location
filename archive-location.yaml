@@ -1,21 +1,30 @@
 location_submenu:
-  build:
-    label: Building
-    url: ['admin/index']
-    select: controller
-  depo:
-    label: Depo(s)
-    url: ['depo/index']
-    select: controller
-  room:
-    label: Room(s)
-    url: ['room/index']
-    select: controller
-  rack:
-    label: Rack(s)
-    url: ['rack/index']
-    select: controller
-  storage:
-    label: Storages
-    url: ['storage/index']
-    select: controller
+  0:
+    setting:
+      label: Back to Settings
+      url:
+        0: '/archive-pengolahan/setting/admin/index'
+      select: url
+      backTo: true
+  1:
+    build:
+      label: Building
+      url: ['admin/index']
+      select: controller
+    depo:
+      label: Depo(s)
+      url: ['depo/index']
+      select: controller
+    room:
+      label: Room(s)
+      url: ['room/index']
+      select: controller
+    rack:
+      label: Rack(s)
+      url: ['rack/index']
+      select: controller
+  2:
+    storage:
+      label: Storages
+      url: ['storage/index']
+      select: controller

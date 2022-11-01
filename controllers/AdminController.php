@@ -34,9 +34,9 @@ use mdm\admin\components\AccessControl;
 use yii\filters\VerbFilter;
 use ommu\archiveLocation\models\ArchiveLocationBuilding;
 use ommu\archiveLocation\models\search\ArchiveLocationBuilding as ArchiveLocationBuildingSearch;
-use ommu\archive\models\ArchiveSetting;
 use yii\helpers\Inflector;
 use yii\helpers\ArrayHelper;
+use ommu\archivePengolahan\models\ArchivePengolahanSetting;
 
 class AdminController extends Controller
 {
@@ -49,10 +49,7 @@ class AdminController extends Controller
 
         $this->subMenu = $this->module->params['location_submenu'];
 
-		$setting = ArchiveSetting::find()
-			->select(['breadcrumb_param'])
-			->where(['id' => 1])
-			->one();
+        $setting = new ArchivePengolahanSetting(['app' => 'archivePengolahanModule']);
 		$this->breadcrumbApp = $setting->breadcrumb;
 		$this->breadcrumbAppParam = $setting->getBreadcrumbAppParam();
 	}
@@ -271,6 +268,7 @@ class AdminController extends Controller
 		$this->view->keywords = '';
 		return $this->oRender('admin_view', [
 			'model' => $model,
+			'small' => false,
 		]);
 	}
 

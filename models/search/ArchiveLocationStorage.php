@@ -63,7 +63,8 @@ class ArchiveLocationStorage extends ArchiveLocationStorageModel
         if (!($column && is_array($column))) {
             $query = ArchiveLocationStorageModel::find()->alias('t');
         } else {
-            $query = ArchiveLocationStorageModel::find()->alias('t')->select($column);
+            $query = ArchiveLocationStorageModel::find()->alias('t')
+                ->select($column);
         }
 		$query->joinWith([
 			'parent.title parent', 
