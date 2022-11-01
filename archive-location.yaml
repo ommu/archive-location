@@ -3,8 +3,7 @@ location_submenu:
     setting:
       label: Back to Settings
       url:
-        0: '/archive/setting/admin/index'
-        archive: $_GET*id
+        0: '/archive-pengolahan/setting/admin/index'
       select: url
       backTo: true
   1:

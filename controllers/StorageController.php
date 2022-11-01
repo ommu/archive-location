@@ -34,7 +34,7 @@ use mdm\admin\components\AccessControl;
 use yii\filters\VerbFilter;
 use ommu\archiveLocation\models\ArchiveLocationStorage;
 use ommu\archiveLocation\models\search\ArchiveLocationStorage as ArchiveLocationStorageSearch;
-use ommu\archive\models\ArchiveSetting;
+use ommu\archivePengolahan\models\ArchivePengolahanSetting;
 
 class StorageController extends Controller
 {
@@ -47,10 +47,7 @@ class StorageController extends Controller
 
         $this->subMenu = $this->module->params['location_submenu'];
 
-		$setting = ArchiveSetting::find()
-			->select(['breadcrumb_param'])
-			->where(['id' => 1])
-			->one();
+        $setting = new ArchivePengolahanSetting(['app' => 'archivePengolahanModule']);
 		$this->breadcrumbApp = $setting->breadcrumb;
 		$this->breadcrumbAppParam = $setting->getBreadcrumbAppParam();
 	}
