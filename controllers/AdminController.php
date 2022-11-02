@@ -127,7 +127,7 @@ class AdminController extends Controller
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
 			'columns' => $columns,
-			'parent' => $parent,
+			'parent' => $parent ?? null,
 		]);
 	}
 
@@ -162,10 +162,12 @@ class AdminController extends Controller
             }
 		}
 
+        $building = null;
         if (($id = Yii::$app->request->get('id')) != null) {
             $model->parent_id = $id;
+            $building = $model->parent->parent_id;
         }
-		$model->building = $model->parent->parent_id;
+		$model->building = $building;
 		$model->type = $this->type;
 
         if (Yii::$app->request->isPost) {
