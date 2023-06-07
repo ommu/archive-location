@@ -36,7 +36,7 @@ use ommu\archiveLocation\models\ArchiveLocationBuilding;
 use ommu\archiveLocation\models\search\ArchiveLocationBuilding as ArchiveLocationBuildingSearch;
 use yii\helpers\Inflector;
 use yii\helpers\ArrayHelper;
-use ommu\archivePengolahan\models\ArchivePengolahanSetting;
+use ommu\archive\models\ArchiveSetting;
 
 class AdminController extends Controller
 {
@@ -49,7 +49,10 @@ class AdminController extends Controller
 
         $this->subMenu = $this->module->params['location_submenu'];
 
-        $setting = new ArchivePengolahanSetting(['app' => 'archivePengolahanModule']);
+		$setting = ArchiveSetting::find()
+			->select(['breadcrumb_param'])
+			->where(['id' => 1])
+			->one();
 		$this->breadcrumbApp = $setting->breadcrumb;
 		$this->breadcrumbAppParam = $setting->getBreadcrumbAppParam();
 	}
