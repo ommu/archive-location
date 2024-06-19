@@ -5,7 +5,7 @@
  * Menangani event-event yang ada pada modul archive-location.
  * 
  * @author Putra Sudaryanto <putra@ommu.id>
- * @contact (+62)856-299-4114
+ * @contact (+62)811-2540-432
  * @copyright Copyright (c) 2019 OMMU (www.ommu.id)
  * @created date 26 December 2019, 15:58 WIB
  * @link https://bitbucket.org/ommu/archive-location

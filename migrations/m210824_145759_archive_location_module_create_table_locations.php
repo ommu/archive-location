@@ -3,7 +3,7 @@
  * m210824_145759_archive_location_module_create_table_locations
  * 
  * @author Putra Sudaryanto <putra@ommu.id>
- * @contact (+62)856-299-4114
+ * @contact (+62)811-2540-432
  * @copyright Copyright (c) 2021 OMMU (www.ommu.id)
  * @created date 24 August 2021, 14:58 WIB
  * @link https://bitbucket.org/ommu/archive-location
