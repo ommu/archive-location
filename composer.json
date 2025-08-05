@@ -16,15 +16,15 @@
 		"yii2"
 	],
 	"license": "Apache-2.0",
-	"homepage": "https://github.com/ommu/archive-location",
+	"homepage": "https://github.com/ommu/mod-archive-location",
 	"support": {
-		"issues": "https://github.com/ommu/archive-location/issues",
-		"wiki": "https://github.com/ommu/archive-location/wiki",
-		"source": "https://github.com/ommu/archive-location"
+		"issues": "https://github.com/ommu/mod-archive-location/issues",
+		"wiki": "https://github.com/ommu/mod-archive-location/wiki",
+		"source": "https://github.com/ommu/mod-archive-location"
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/ommu/archive-location.git"
+		"url": "https://github.com/ommu/mod-archive-location.git"
 	},
 	"authors": [
 		{
